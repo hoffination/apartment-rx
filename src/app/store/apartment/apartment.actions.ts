@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Store, Action } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import { CustomAction } from '../custom.action';
 import { AppState } from '../../models/appState';
