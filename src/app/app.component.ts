@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+
+import { Apartment } from './models/apartment';
+import { ApartmentActions } from './store/apartment/apartment.actions';
+import { ApartmentService } from './services/apartment.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +11,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  public title = 'app';
+  private currentApartments$: Observable<Apartment[]>;
+
+  constructor(
+    apartmentService: ApartmentService,
+    public actions: ApartmentActions
+  ) {
+    this.currentApartments$ = apartmentService.getApartments();
+  }
 }

@@ -1,8 +1,7 @@
 <h3>Apartments Available:</h3>
-<ul *ngFor="let apartment of currentApartments$ | async">
-  <li>{{apartment.id}}</li>
-</ul>
+<div *ngFor="let apartment of apartments">
+  <p>{{apartment.id}}</p>
+  <button (click)="remove(apartment.id)">X</button>
+</div>
 
-{{currentApartments$ | async}}
-
-<button (click)="addApartment()">Add Apartment</button>
+<button (click)="add()">Add Apartment</button>
