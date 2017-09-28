@@ -31,6 +31,7 @@ export class ApartmentComponent implements OnInit {
       },
       name: 'High heights'
     });
+    console.log('added');
   }
 
   remove(id: number) {
