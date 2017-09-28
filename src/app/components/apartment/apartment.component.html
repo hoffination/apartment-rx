@@ -1,0 +1,8 @@
+<h3>Apartments Available:</h3>
+<ul *ngFor="let apartment of currentApartments$ | async">
+  <li>{{apartment.id}}</li>
+</ul>
+
+{{currentApartments$ | async}}
+
+<button (click)="addApartment()">Add Apartment</button>

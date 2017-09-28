@@ -1,0 +1,32 @@
+import { Injectable } from '@angular/core';
+import { Store, Action } from '@ngrx/store';
+
+import { CustomAction } from '../custom.action';
+import { AppState } from '../../models/appState';
+import { Apartment } from '../../models/apartment';
+
+export const ADD = 'ADD';
+export const REMOVE = 'REMOVE';
+
+export class Add implements CustomAction {
+    readonly type = ADD;
+    constructor(public payload: Apartment) {}
+}
+
+export class Remove implements CustomAction {
+    readonly type = REMOVE;
+    constructor(public payload: {id: string}) {}
+}
+
+@Injectable()
+export class ApartmentActions {
+    constructor(private store: Store<AppState>) {}
+
+    add(apartment: Apartment) {
+        this.store.dispatch(new Add(apartment));
+    }
+
+    remove(id: string) {
+        this.store.dispatch(new Remove({ id }));
+    }
+}
