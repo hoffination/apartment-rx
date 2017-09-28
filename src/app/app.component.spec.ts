@@ -1,11 +1,30 @@
 import { TestBed, async } from '@angular/core/testing';
+import { Store, StoreModule } from '@ngrx/store';
+
 import { AppComponent } from './app.component';
+import { ApartmentComponent } from './components/apartment/apartment.component';
+
+import { ApartmentActions } from './store/apartment/apartment.actions';
+
+import { ApartmentService } from './services/apartment.service';
+
 describe('AppComponent', () => {
+  const apartmentService = ApartmentService;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        ApartmentComponent
       ],
+      providers: [
+        Store,
+        ApartmentService,
+        ApartmentActions
+      ],
+      imports: [
+        StoreModule.forRoot([])
+      ]
     }).compileComponents();
   }));
   it('should create the app', async(() => {

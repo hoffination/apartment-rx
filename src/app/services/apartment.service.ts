@@ -11,6 +11,6 @@ export class ApartmentService {
   constructor(private store: Store<AppState>) { }
 
   getApartments(): Observable<Apartment[]> {
-    return this.store.select(appState => appState.apartments);
+    return this.store.select((appState: AppState) => appState.apartments);
   }
 }
