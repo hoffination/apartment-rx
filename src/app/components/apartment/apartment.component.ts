@@ -21,16 +21,16 @@ export class ApartmentComponent implements OnInit {
   ngOnInit() {}
 
   add() {
+    // this is generated in the reducer
     this.addApartment.emit({
-      id: '', // this is generated in the reducer
-      cost: 2000,
+      id: '',
+      cost: 0,
       position: {
-        x: 1,
-        y: 1
+        x: 0,
+        y: 0
       },
-      name: 'High heights'
+      name: ''
     });
-    console.log('added');
   }
 
   remove(id: number) {
