@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
-import { EventEmitter } from '@angular/core';
+import { By } from '@angular/platform-browser';
+import { EventEmitter, DebugElement } from '@angular/core';
 
 import { Apartment } from '../../models/apartment';
 import { ApartmentComponent } from './apartment.component';
@@ -7,17 +8,21 @@ import { ApartmentComponent } from './apartment.component';
 describe('ApartmentComponent', () => {
   let component: ApartmentComponent;
   let fixture: ComponentFixture<ApartmentComponent>;
+  let button: DebugElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ApartmentComponent ]
+      declarations: [ApartmentComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ApartmentComponent);
     component = fixture.componentInstance;
+    button = fixture.debugElement.query(By.css('.add'));
+
+    component.apartments = [];
     fixture.detectChanges();
   });
 
@@ -25,20 +30,36 @@ describe('ApartmentComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should be able to add apartments', (done) => {
-    component.addApartment.subscribe((a: Apartment) => {
-      expect(a).toBeTruthy();
-      done();
-    });
-
+  it('should be able to add apartments', () => {
+    let apartment: Apartment;
     spyOn(component, 'add').and.callThrough();
-    const compiled = fixture.debugElement.nativeElement;
-    compiled.querySelector('button').click();
-    fixture.detectChanges();
-    expect(component.add).toHaveBeenCalledTimes(1);
-    component.add();
+    component.addApartment.subscribe((a: Apartment) => apartment = a);
 
-    // This apparently does seem to work
-    // component.addApartment.emit(null);
+    button.triggerEventHandler('click', null);
+    expect(component.add).toHaveBeenCalledTimes(1);
+    expect(apartment).toBeTruthy();
+  });
+
+  it('should be able to remove apartments', () => {
+    const apartment: Apartment = {
+      id: 'test',
+      cost: 2000,
+      position: {
+        x: 1,
+        y: 1
+      },
+      name: 'High heights'
+    };
+    component.apartments.push(apartment);
+    fixture.detectChanges();
+
+    let id: number;
+    spyOn(component, 'remove').and.callThrough();
+    component.removeApartment.subscribe((aid: number) => id = aid);
+    const removeButton = fixture.debugElement.query(By.css('.remove'));
+    removeButton.triggerEventHandler('click', null);
+
+    expect(component.remove).toHaveBeenCalledTimes(1);
+    expect(id).toEqual(apartment.id);
   });
 });

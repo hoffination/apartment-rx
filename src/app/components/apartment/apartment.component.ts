@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import uuidv4 from 'uuid/v4';
 
 import { Apartment } from '../../models/apartment';
 import { ApartmentService } from '../../services/apartment.service';
@@ -23,7 +22,7 @@ export class ApartmentComponent implements OnInit {
 
   add() {
     this.addApartment.emit({
-      id: uuidv4(),
+      id: '', // this is generated in the reducer
       cost: 2000,
       position: {
         x: 1,

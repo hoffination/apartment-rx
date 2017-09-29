@@ -9,8 +9,6 @@ import { ApartmentActions } from './store/apartment/apartment.actions';
 import { ApartmentService } from './services/apartment.service';
 
 describe('AppComponent', () => {
-  const apartmentService = ApartmentService;
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
