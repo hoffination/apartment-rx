@@ -6,10 +6,16 @@ import { AppState } from '../../models/appState';
 import { Apartment } from '../../models/apartment';
 
 export const ADD = 'ADD';
+export const ADD_FINAL = 'ADD_FINAL';
 export const REMOVE = 'REMOVE';
 
 export class Add implements CustomAction {
     readonly type = ADD;
+    constructor(public payload: Apartment) {}
+}
+
+export class AddFinal implements CustomAction {
+    readonly type = ADD_FINAL;
     constructor(public payload: Apartment) {}
 }
 

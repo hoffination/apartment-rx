@@ -13,6 +13,8 @@ import { ApartmentComponent } from './components/apartment/apartment.component';
 
 import { ApartmentService } from './services/apartment.service';
 
+import { ApartmentEffects } from './services/apartment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +22,8 @@ import { ApartmentService } from './services/apartment.service';
   ],
   imports: [
     BrowserModule,
-    StoreModule.forRoot(rootReducer)
+    StoreModule.forRoot(rootReducer),
+    EffectsModule.forRoot([ApartmentEffects])
   ],
   providers: [
     ApartmentActions,
