@@ -4,28 +4,38 @@ import { Effect, Actions } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
 
 import { CustomAction } from '../store/custom.action';
-import { ADD, ApartmentActions, AddFinal } from '../store/apartment/apartment.actions';
+import { ADD, ADD_FINAL, AddFinal, Remove } from '../store/apartment/apartment.actions';
 
-import { generate, getRandomArbitraryCost } from './generators/name.gen';
+import { generate, getRandomArbitraryCost, getRandomArbitraryInteger } from './generators/name.gen';
 import { Apartment } from '../models/apartment';
 
 const MAX_COST = 4000;
 const MIN_COST = 1200;
+const MAX_DURATION = 4000;
+const MIN_DURATION = 1000;
 
 @Injectable()
 export class ApartmentEffects {
 
-    constructor(private actions$: Actions, private apartmentActions: ApartmentActions) {}
+    constructor(private actions$: Actions) {}
 
     @Effect()
     add$: Observable<CustomAction> = this.actions$
         .ofType(ADD)
         .map((action: CustomAction) => action.payload)
-        .map((action: Apartment) => new AddFinal(
-            Object.assign({}, action, {
+        .map((apartment: Apartment) => new AddFinal(
+            Object.assign({}, apartment, {
                 id: uuidv4(),
                 name: generate(),
-                cost: getRandomArbitraryCost(MIN_COST, MAX_COST)
+                cost: getRandomArbitraryCost(MIN_COST, MAX_COST),
+                duration: getRandomArbitraryInteger(MIN_DURATION, MAX_DURATION)
             })
         ));
+    
+    @Effect()
+    addFinal$: Observable<CustomAction> = this.actions$
+        .ofType(ADD_FINAL)
+        .map((action: CustomAction) => action.payload)
+        .delayWhen((apartment: Apartment) => Observable.timer(apartment.duration))
+        .map((apartment: Apartment) => new Remove({ id: apartment.id }))
 }

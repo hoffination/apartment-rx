@@ -6,4 +6,5 @@ export interface Apartment {
         y: number;
     };
     cost: number;
+    duration: number;
 }
