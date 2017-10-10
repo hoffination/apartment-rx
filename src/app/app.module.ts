@@ -10,11 +10,11 @@ import { rootReducer } from './store/rootReducer';
 import { ApartmentActions } from './store/apartment/apartment.actions';
 
 import { AppComponent } from './app.component';
-import { ApartmentComponent } from './components/apartment/apartment.component';
+import { ApartmentComponent } from './apartment/apartment.component';
 
 import { ApartmentService } from './services/apartment.service';
 
-import { ApartmentEffects } from './services/apartment';
+import { ApartmentEffects } from './store/apartment/apartment.effects';
 
 @NgModule({
   declarations: [

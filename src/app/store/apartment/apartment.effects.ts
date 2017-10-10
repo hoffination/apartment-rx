@@ -3,11 +3,11 @@ import { Injectable } from '@angular/core';
 import { Effect, Actions } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
 
-import { CustomAction } from '../store/custom.action';
-import { ADD, ADD_FINAL, AddFinal, Remove } from '../store/apartment/apartment.actions';
+import { CustomAction } from '../custom.action';
+import { ADD, ADD_FINAL, AddFinal, Remove } from './apartment.actions';
 
-import { generate, getRandomArbitraryCost, getRandomArbitraryInteger } from './generators/name.gen';
-import { Apartment } from '../models/apartment';
+import { generate, getRandomArbitraryCost, getRandomArbitraryInteger } from '../../services/generators/name.gen';
+import { Apartment } from '../../models/apartment';
 
 const MAX_COST = 4000;
 const MIN_COST = 1200;

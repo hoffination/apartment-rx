@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core
 import { By } from '@angular/platform-browser';
 import { EventEmitter, DebugElement } from '@angular/core';
 
-import { Apartment } from '../../models/apartment';
+import { Apartment } from '../models/apartment';
 import { ApartmentComponent } from './apartment.component';
 
 describe('ApartmentComponent', () => {
@@ -48,14 +48,15 @@ describe('ApartmentComponent', () => {
         x: 1,
         y: 1
       },
-      name: 'High heights'
+      name: 'High heights',
+      duration: 1000
     };
     component.apartments.push(apartment);
     fixture.detectChanges();
 
-    let id: number;
+    let id: string;
     spyOn(component, 'remove').and.callThrough();
-    component.removeApartment.subscribe((aid: number) => id = aid);
+    component.removeApartment.subscribe((aid: string) => id = aid);
     const removeButton = fixture.debugElement.query(By.css('.remove'));
     removeButton.triggerEventHandler('click', null);
 

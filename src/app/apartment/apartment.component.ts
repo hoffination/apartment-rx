@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { Apartment } from '../../models/apartment';
-import { ApartmentService } from '../../services/apartment.service';
-import { ApartmentActions } from '../../store/apartment/apartment.actions';
+import { Apartment } from '../models/apartment';
+import { ApartmentService } from '../services/apartment.service';
+import { ApartmentActions } from '../store/apartment/apartment.actions';
 
 @Component({
   selector: 'app-apartment',

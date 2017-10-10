@@ -2,7 +2,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
-import { ApartmentComponent } from './components/apartment/apartment.component';
+import { ApartmentComponent } from './apartment/apartment.component';
 
 import { ApartmentActions } from './store/apartment/apartment.actions';
 
