@@ -11,5 +11,5 @@ import { ApartmentService } from './services/apartment.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public title = 'app';
+  public title = 'Apartment Search';
 }

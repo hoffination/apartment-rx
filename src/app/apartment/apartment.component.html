@@ -1,3 +1,4 @@
+<app-map [apartments]="currentApartments$ | async"></app-map>
 <app-apartment-list [apartments]="currentApartments$ | async"
   (addApartment)="actions.add($event)"
   (removeApartment)="actions.remove($event)">

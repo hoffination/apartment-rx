@@ -1,7 +1,6 @@
 <h3>Apartments Available:</h3>
 <div *ngFor="let apartment of apartments">
   <p>{{apartment.name}}</p>
-  <p>{{apartment.duration}}</p>
   <button class="remove" (click)="remove(apartment.id)">X</button>
 </div>
 
