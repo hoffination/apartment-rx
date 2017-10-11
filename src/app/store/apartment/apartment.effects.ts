@@ -23,14 +23,15 @@ export class ApartmentEffects {
     add$: Observable<CustomAction> = this.actions$
         .ofType(ADD)
         .map((action: CustomAction) => action.payload)
-        .map((apartment: Apartment) => new AddFinal(
-            Object.assign({}, apartment, {
-                id: uuidv4(),
-                name: generate(),
-                cost: getRandomArbitraryCost(MIN_COST, MAX_COST),
-                duration: getRandomArbitraryInteger(MIN_DURATION, MAX_DURATION)
-            })
-        ));
+        .map((apartment: Apartment) => new AddFinal({
+            id: uuidv4(),
+            name: generate(),
+            cost: getRandomArbitraryCost(MIN_COST, MAX_COST),
+            duration: getRandomArbitraryInteger(MIN_DURATION, MAX_DURATION),
+            position: {
+                x: 0, y: 0
+            }
+        }));
     
     @Effect()
     addFinal$: Observable<CustomAction> = this.actions$

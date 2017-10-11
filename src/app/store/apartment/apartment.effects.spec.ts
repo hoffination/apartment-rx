@@ -25,19 +25,9 @@ describe('Apartment Effects', () => {
     });
 
     it('should output a populated apartment when an ADD action is fired', () => {
-        let apartment: Apartment = {
-            id: '',
-            cost: 0,
-            position: {
-                x: 1,
-                y: 1
-            },
-            name: '',
-            duration: 0
-        };
         actions = new ReplaySubject(1);
 
-        actions.next(new Add(apartment));
+        actions.next(new Add());
 
         effects.add$.subscribe((action: CustomAction) => {
             expect(action.type).toEqual(ADD_FINAL);

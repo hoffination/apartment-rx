@@ -11,7 +11,6 @@ export const REMOVE = 'REMOVE';
 
 export class Add implements CustomAction {
     readonly type = ADD;
-    constructor(public payload: Apartment) {}
 }
 
 export class AddFinal implements CustomAction {
@@ -28,8 +27,8 @@ export class Remove implements CustomAction {
 export class ApartmentActions {
     constructor(private store: Store<AppState>) {}
 
-    add(apartment: Apartment) {
-        this.store.dispatch(new Add(apartment));
+    add() {
+        this.store.dispatch(new Add());
     }
 
     remove(id: string) {

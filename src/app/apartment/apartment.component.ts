@@ -18,37 +18,16 @@ export class ApartmentComponent implements OnInit {
   @Output()
   removeApartment: EventEmitter<number> = new EventEmitter<number>();
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() {}
 
   add() {
-    // this is generated in the reducer
-    this.addApartment.emit({
-      id: '',
-      cost: 0,
-      position: {
-        x: 0,
-        y: 0
-      },
-      name: '',
-      duration: 0
-    });
+    this.addApartment.emit();
   }
 
   auto() {
     setInterval(() => {
       for(let i = 0; i < 4; i++) {
-        this.addApartment.emit({
-          id: '',
-          cost: 0,
-          position: {
-            x: 0,
-            y: 0
-          },
-          name: '',
-          duration: 0
-        });
+        this.addApartment.emit();
       }
     }, 2000);
   }

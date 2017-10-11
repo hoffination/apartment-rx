@@ -1,3 +1,4 @@
+import * as td from 'testdouble';
 import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { EventEmitter, DebugElement } from '@angular/core';
@@ -14,7 +15,7 @@ describe('ApartmentComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ApartmentComponent]
     })
-      .compileComponents();
+    .compileComponents();
   }));
 
   beforeEach(() => {
@@ -31,13 +32,9 @@ describe('ApartmentComponent', () => {
   });
 
   it('should be able to add apartments', () => {
-    let apartment: Apartment;
     spyOn(component, 'add').and.callThrough();
-    component.addApartment.subscribe((a: Apartment) => apartment = a);
-
     button.triggerEventHandler('click', null);
     expect(component.add).toHaveBeenCalledTimes(1);
-    expect(apartment).toBeTruthy();
   });
 
   it('should be able to remove apartments', () => {
