@@ -18,7 +18,6 @@ describe('Apartment Effects', () => {
           providers: [
             ApartmentEffects,
             provideMockActions(() => actions),
-            // other providers
           ],
         });
     
@@ -41,7 +40,12 @@ describe('Apartment Effects', () => {
         subject.next(new AddFinal(apartment));
 
         effects.add$.subscribe((action: CustomAction) => {
-            expect(action.payload).toBeTruthy();
+            let result: Apartment = action.payload;
+            expect(result).toBeTruthy();
+            expect(result.id.length).toBeGreaterThan(0);
+            expect(result.name.length).toBeGreaterThan(0);
+            expect(result.cost).toBeGreaterThan(0);
+            expect(result.duration).toBeGreaterThan(0);
         });
     })
 })
