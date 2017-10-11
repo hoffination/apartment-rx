@@ -15,11 +15,13 @@ import { ApartmentComponent } from './apartment/apartment.component';
 import { ApartmentService } from './services/apartment.service';
 
 import { ApartmentEffects } from './store/apartment/apartment.effects';
+import { ApartmentListComponent } from './apartment/apartment-list/apartment-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ApartmentComponent
+    ApartmentComponent,
+    ApartmentListComponent
   ],
   imports: [
     BrowserModule,

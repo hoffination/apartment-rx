@@ -12,12 +12,4 @@ import { ApartmentService } from './services/apartment.service';
 })
 export class AppComponent {
   public title = 'app';
-  private currentApartments$: Observable<Apartment[]>;
-
-  constructor(
-    apartmentService: ApartmentService,
-    public actions: ApartmentActions
-  ) {
-    this.currentApartments$ = apartmentService.getApartments();
-  }
 }

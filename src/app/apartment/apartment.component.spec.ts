@@ -1,63 +1,17 @@
 import * as td from 'testdouble';
-import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { EventEmitter, DebugElement } from '@angular/core';
-
-import { Apartment } from '../models/apartment';
 import { ApartmentComponent } from './apartment.component';
+import { Observable } from 'rxjs/Observable';
+import { Apartment } from '../models/apartment';
 
 describe('ApartmentComponent', () => {
-  let component: ApartmentComponent;
-  let fixture: ComponentFixture<ApartmentComponent>;
-  let button: DebugElement;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ApartmentComponent]
-    })
-    .compileComponents();
-  }));
-
+  let apartmentService, actions;
+  
   beforeEach(() => {
-    fixture = TestBed.createComponent(ApartmentComponent);
-    component = fixture.componentInstance;
-    button = fixture.debugElement.query(By.css('.add'));
+    apartmentService = td.object(['getApartments'])
+  })
 
-    component.apartments = [];
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
-  it('should be able to add apartments', () => {
-    spyOn(component, 'add').and.callThrough();
-    button.triggerEventHandler('click', null);
-    expect(component.add).toHaveBeenCalledTimes(1);
-  });
-
-  it('should be able to remove apartments', () => {
-    const apartment: Apartment = {
-      id: 'test',
-      cost: 2000,
-      position: {
-        x: 1,
-        y: 1
-      },
-      name: 'High heights',
-      duration: 1000
-    };
-    component.apartments.push(apartment);
-    fixture.detectChanges();
-
-    let id: string;
-    spyOn(component, 'remove').and.callThrough();
-    component.removeApartment.subscribe((aid: string) => id = aid);
-    const removeButton = fixture.debugElement.query(By.css('.remove'));
-    removeButton.triggerEventHandler('click', null);
-
-    expect(component.remove).toHaveBeenCalledTimes(1);
-    expect(id).toEqual(apartment.id);
+  it('should get the apartments on construction', () => {
+    const instance = new ApartmentComponent(apartmentService, actions);
+    td.verify(apartmentService.getApartments());
   });
 });

@@ -7,13 +7,15 @@ import { ApartmentComponent } from './apartment/apartment.component';
 import { ApartmentActions } from './store/apartment/apartment.actions';
 
 import { ApartmentService } from './services/apartment.service';
+import { ApartmentListComponent } from './apartment/apartment-list/apartment-list.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
-        ApartmentComponent
+        ApartmentComponent,
+        ApartmentListComponent
       ],
       providers: [
         Store,

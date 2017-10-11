@@ -4,8 +4,5 @@
     Welcome to {{title}}!
   </h1>
 
-  <app-apartment [apartments]="currentApartments$ | async"
-    (addApartment)="actions.add($event)"
-    (removeApartment)="actions.remove($event)">
-  </app-apartment>
+  <app-apartment></app-apartment>
 </div>
