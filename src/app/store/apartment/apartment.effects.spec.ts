@@ -4,14 +4,14 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Observable } from 'rxjs/Observable';
 import { Actions } from '@ngrx/effects';
 
-import { Add, AddFinal } from './apartment.actions';
+import { Add, AddFinal, ADD_FINAL, REMOVE } from './apartment.actions';
 import { ApartmentEffects } from './apartment.effects';
 import { Apartment } from '../../models/apartment';
 import { CustomAction } from '../custom.action';
 
 describe('Apartment Effects', () => {
     let effects: ApartmentEffects;
-    let actions: Observable<any>;
+    let actions: ReplaySubject<any>;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -24,7 +24,7 @@ describe('Apartment Effects', () => {
         effects = TestBed.get(ApartmentEffects);
     });
 
-    it('should exist', () => {
+    it('should output a populated apartment when an ADD action is fired', () => {
         let apartment: Apartment = {
             id: '',
             cost: 0,
@@ -35,11 +35,12 @@ describe('Apartment Effects', () => {
             name: '',
             duration: 0
         };
-        let subject = new ReplaySubject(1);
+        actions = new ReplaySubject(1);
 
-        subject.next(new AddFinal(apartment));
+        actions.next(new Add(apartment));
 
         effects.add$.subscribe((action: CustomAction) => {
+            expect(action.type).toEqual(ADD_FINAL);
             let result: Apartment = action.payload;
             expect(result).toBeTruthy();
             expect(result.id.length).toBeGreaterThan(0);
@@ -47,5 +48,27 @@ describe('Apartment Effects', () => {
             expect(result.cost).toBeGreaterThan(0);
             expect(result.duration).toBeGreaterThan(0);
         });
-    })
+    });
+
+    it('should remove an apartment a while after the ADD_FINAL action is fired', () => {
+        let apartment: Apartment = {
+            id: 'test',
+            cost: 0,
+            position: {
+                x: 1,
+                y: 1
+            },
+            name: '',
+            duration: 1000
+        };
+        actions = new ReplaySubject(1);
+
+        actions.next(new AddFinal(apartment));
+
+        effects.addFinal$.subscribe((action: CustomAction) => {
+            expect(action.payload).toBeTruthy();
+            expect(action.type).toEqual(REMOVE);
+            expect(action.payload.id).toEqual(apartment.id);
+        });
+    });
 })

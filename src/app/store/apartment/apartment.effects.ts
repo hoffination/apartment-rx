@@ -1,4 +1,4 @@
-import uuidv4 from 'uuid/v4';
+import * as uuidv4 from 'uuid/v4';
 import { Injectable } from '@angular/core';
 import { Effect, Actions } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
