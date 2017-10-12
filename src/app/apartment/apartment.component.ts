@@ -13,7 +13,7 @@ import { ApartmentActions } from '../store/apartment/apartment.actions';
 export class ApartmentComponent implements OnInit {
 
   private currentApartments$: Observable<Apartment[]>;
-  
+
   constructor(
     apartmentService: ApartmentService,
     public actions: ApartmentActions

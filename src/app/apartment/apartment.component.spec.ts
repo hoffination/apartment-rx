@@ -5,10 +5,10 @@ import { Apartment } from '../models/apartment';
 
 describe('ApartmentComponent', () => {
   let apartmentService, actions;
-  
+
   beforeEach(() => {
-    apartmentService = td.object(['getApartments'])
-  })
+    apartmentService = td.object(['getApartments']);
+  });
 
   it('should get the apartments on construction', () => {
     const instance = new ApartmentComponent(apartmentService, actions);

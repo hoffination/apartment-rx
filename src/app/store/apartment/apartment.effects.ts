@@ -22,8 +22,7 @@ export class ApartmentEffects {
     @Effect()
     add$: Observable<CustomAction> = this.actions$
         .ofType(ADD)
-        .map((action: CustomAction) => action.payload)
-        .map((apartment: Apartment) => new AddFinal({
+        .map(() => new AddFinal({
             id: uuidv4(),
             name: generate(),
             cost: getRandomArbitraryCost(MIN_COST, MAX_COST),
@@ -32,11 +31,11 @@ export class ApartmentEffects {
                 x: 0, y: 0
             }
         }));
-    
+
     @Effect()
     addFinal$: Observable<CustomAction> = this.actions$
         .ofType(ADD_FINAL)
         .map((action: CustomAction) => action.payload)
         .delayWhen((apartment: Apartment) => Observable.timer(apartment.duration))
-        .map((apartment: Apartment) => new Remove({ id: apartment.id }))
+        .map((apartment: Apartment) => new Remove({ id: apartment.id }));
 }

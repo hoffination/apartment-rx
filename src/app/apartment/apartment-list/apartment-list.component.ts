@@ -24,7 +24,7 @@ export class ApartmentListComponent implements OnInit {
 
   auto() {
     setInterval(() => {
-      for(let i = 0; i < 4; i++) {
+      for (let i = 0; i < 4; i++) {
         this.addApartment.emit();
       }
     }, 2000);

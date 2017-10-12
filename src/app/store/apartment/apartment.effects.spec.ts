@@ -10,55 +10,55 @@ import { Apartment } from '../../models/apartment';
 import { CustomAction } from '../custom.action';
 
 describe('Apartment Effects', () => {
-    let effects: ApartmentEffects;
-    let actions: ReplaySubject<any>;
+  let effects: ApartmentEffects;
+  let actions: ReplaySubject<any>;
 
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-          providers: [
-            ApartmentEffects,
-            provideMockActions(() => actions),
-          ],
-        });
-    
-        effects = TestBed.get(ApartmentEffects);
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        ApartmentEffects,
+        provideMockActions(() => actions),
+      ],
     });
 
-    it('should output a populated apartment when an ADD action is fired', () => {
-        actions = new ReplaySubject(1);
+    effects = TestBed.get(ApartmentEffects);
+  });
 
-        actions.next(new Add());
+  it('should output a populated apartment when an ADD action is fired', () => {
+    actions = new ReplaySubject(1);
 
-        effects.add$.subscribe((action: CustomAction) => {
-            expect(action.type).toEqual(ADD_FINAL);
-            let result: Apartment = action.payload;
-            expect(result).toBeTruthy();
-            expect(result.id.length).toBeGreaterThan(0);
-            expect(result.name.length).toBeGreaterThan(0);
-            expect(result.cost).toBeGreaterThan(0);
-            expect(result.duration).toBeGreaterThan(0);
-        });
+    actions.next(new Add());
+
+    effects.add$.subscribe((action: CustomAction) => {
+      expect(action.type).toEqual(ADD_FINAL);
+      const result: Apartment = action.payload;
+      expect(result).toBeTruthy();
+      expect(result.id.length).toBeGreaterThan(0);
+      expect(result.name.length).toBeGreaterThan(0);
+      expect(result.cost).toBeGreaterThan(0);
+      expect(result.duration).toBeGreaterThan(0);
     });
+  });
 
-    it('should remove an apartment a while after the ADD_FINAL action is fired', () => {
-        let apartment: Apartment = {
-            id: 'test',
-            cost: 0,
-            position: {
-                x: 1,
-                y: 1
-            },
-            name: '',
-            duration: 1000
-        };
-        actions = new ReplaySubject(1);
+  it('should remove an apartment a while after the ADD_FINAL action is fired', () => {
+    const apartment: Apartment = {
+      id: 'test',
+      cost: 0,
+      position: {
+        x: 1,
+        y: 1
+      },
+      name: '',
+      duration: 1000
+    };
+    actions = new ReplaySubject(1);
 
-        actions.next(new AddFinal(apartment));
+    actions.next(new AddFinal(apartment));
 
-        effects.addFinal$.subscribe((action: CustomAction) => {
-            expect(action.payload).toBeTruthy();
-            expect(action.type).toEqual(REMOVE);
-            expect(action.payload.id).toEqual(apartment.id);
-        });
+    effects.addFinal$.subscribe((action: CustomAction) => {
+      expect(action.payload).toBeTruthy();
+      expect(action.type).toEqual(REMOVE);
+      expect(action.payload.id).toEqual(apartment.id);
     });
-})
+  });
+});
