@@ -8,6 +8,7 @@ import { ApartmentActions } from './store/apartment/apartment.actions';
 
 import { ApartmentService } from './services/apartment.service';
 import { ApartmentListComponent } from './apartment/apartment-list/apartment-list.component';
+import { MapComponent } from './apartment/map/map.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -15,7 +16,8 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         ApartmentComponent,
-        ApartmentListComponent
+        ApartmentListComponent,
+        MapComponent
       ],
       providers: [
         Store,

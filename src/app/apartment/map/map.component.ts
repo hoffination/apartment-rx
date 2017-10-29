@@ -22,12 +22,14 @@ export class MapComponent implements OnChanges {
     ctx.clearRect(0, 0, this.width, 500);
     // TODO: add apartment changes as shown here:
     // https://teropa.info/blog/2016/12/12/graphics-in-angular-2.html#drawing-on-the-canvas-from-lifecycle-hooks
-    this.apartments.forEach(a => {
-      const image = new Image();
-      image.onload = function() {
-        ctx.drawImage(<HTMLImageElement>this, 0, 0, 64, 64, 50, 50, 16, 16);
-      };
-      image.src = '../../../assets/map-marker.png';
-    });
+    if (this.apartments) {
+      this.apartments.forEach(a => {
+        const image = new Image();
+        image.onload = function() {
+          ctx.drawImage(<HTMLImageElement>this, 0, 0, 64, 64, 50, 50, 16, 16);
+        };
+        image.src = '../../../assets/map-marker.png';
+      });
+    }
   }
 }
